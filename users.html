@@ -1,0 +1,136 @@
+<html><head>
+    <title>
+
+    </title>
+    <style>
+        form{
+            width:800px;
+            height:400px;
+        }
+        .main{
+            float:left;
+            background-color: burlywood;
+            width:700px;
+            height: 400px;
+        ;
+        }
+        .top{
+            float:left;
+        }
+        .sidenav{
+            float:left;
+            height: 400px;
+            background-color:lightcyan;
+        }
+   </style>
+</head>
+<body>
+    <form onload="display1()">
+<div class="top">
+    <div class="sidenav">
+        Hello <p id="aname"></p>
+        <a href="dashboard.html"> Dashboard</a>
+        <a href="users.html"><p>Users</p></a>
+        <p id="logOut"onclick="logout()">logout</p>
+      </div>
+     
+      
+      <div class="main">
+        <h3>Add user</h3>
+        <table>
+            <tr>
+                <td><input type="text" name="uname" value="Name"></td>
+                <td><input type="email" name="uname" value="Email"></td>
+                <td><input type="password" name="uname" value="password"></td>
+                <td><input type="Date" name="uname" id="date" value="Date of Birth"></td>
+            </tr>
+            <tr><td></td>
+                <td></td>
+           <td></td>
+            <td><input type="button" id="user_btn" onclick="adduser()" value="Add user"></td></tr>
+        </table>
+
+      </div>
+      <div id="last"></div>
+    </div>
+</form>
+</body>
+<script>
+     var arr = new Array();
+    var i=1;
+  var user = {
+       id:"",
+       name:"",
+        email: "",
+        password: "",
+         birthdate:"",
+        age:"",
+    };
+    var dt1 = document.getElementById('date').value;
+    var birth_date = new Date(dt1);
+function adduser(){
+    var users=new Array();
+    users=document.getElementsByName('uname');
+    if(users[0].value==null||users[1].value==null||users[2].value==null||users[3].value==null)
+    {
+        alert("field is empty");
+    }
+    else{
+            user.id=i++;
+        user.name=users[0].value;
+                user.email=users[1].value;
+                user.password=users[2].value;
+                user.birthdate=users[3].value;
+                 user.age=calcAge();
+                store_data();
+                alert(user.age);
+    }
+}
+function store_data() {
+        if (localStorage.getItem("user") == null) {
+            arr.push(user);
+            localStorage.setItem('user', JSON.stringify(arr));
+          i++;
+        } else {
+            var flag=0;
+            arr = JSON.parse(localStorage.getItem("user"));
+            for(i=0;i<arr.length;i++){
+                if(arr[i].name==user.name){flag=1;}
+                }
+                if(flag==0){
+            arr.push(user);
+            localStorage.setItem('user', JSON.stringify(arr));
+        i++;
+                }
+            }
+        display();
+    }
+
+function calcAge() {
+var bdate=document.getElementById('date').value;
+var d = new Date(bdate);
+ages=2020-d.getFullYear();
+return ages;
+}
+function display() {
+        var row = ("<table><td>Name</td><td>Email</td><td>password</td><td>Birth date</td><td>Age</td><td>Action</td></tr>");
+        for(i=0;i<arr.length;i++)
+        {
+            row+="<tr><td>"+arr[i].name+"</td><td>"+arr[i].email+"</td><td>"+arr[i].password+
+            "</td><td>"+arr[i].birthdate+"</td><td>"+arr[i].age+"</td><td><p onclick='edit()'>Edit</p><p onclick='delete()'>Delete</p></td></tr>";
+        }
+        row+="</table>";
+        document.getElementById('last').innerHTML=row;
+    }
+    function edit(){
+        
+    }
+   
+
+    function display1(){
+
+    }
+
+    </script>
+
+    </html>

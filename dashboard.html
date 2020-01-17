@@ -1,0 +1,81 @@
+<html><head>
+    <title>
+
+    </title>
+    <style>
+        form{
+            width:400px;
+            height:400px;
+        }
+        .main{
+            float:left;
+            background-color: burlywood;
+            width:300px;
+            height: 400px;
+        ;
+        }
+        .top{
+            float:left;
+        }
+        .sidenav{
+            float:left;
+            height: 400px;
+            background-color:lightcyan;
+        }
+        #u1,#u2,#u3{
+            float: left;
+            margin:10px;
+        }
+   </style>
+</head>
+<body >
+    <form id="form" >
+<div class="top">
+    <div class="sidenav">
+        Hello <p id="aname"></p>
+        <a href="dashboard.html"> Dashboard</a>
+        <a href="users.html"><p>Users</p></a>
+        <p id="logOut"onclick="logout()">logout</p>
+      </div>
+      <div class="main">
+        <p> Dashboard</p>
+        <div id="u1"></div>
+        <div id="u2">18-50 Years users<p id="p2"></p></div>
+        <div id="u3">Users>50<p id="p3"></p></div>
+      </div>
+    </div>
+</form>
+</body>
+<script>
+ var localAd=new Array();
+ var cnt=0,cnt1=0,cnt2=0;
+ localAd=JSON.parse(localStorage.getItem("user"));
+ document.getElementById('form').addEventListener("load", display);
+
+function display(){
+    document.getElementById('aname').innerHTML=localAdmin.name;
+    alert(localAd.age);
+for(i=0;i<localAd.length;i++){
+    if(localAd.age<18)
+    {
+        cnt++;
+    }
+    else if(localAd.age>50&& localAd.age<=18){
+        cnt1++;
+    }
+    else{
+        cnt2++;
+    }
+}
+alert(cnt);
+    document.getElementById('u1').innerHTML="Users<18<br>Users"+cnt;
+    document.getElementById('p2').innerHTML="Users"+cnt1;
+    document.getElementById('p3').innerHTML="Users"+cnt2;
+   
+}
+function logout(){
+    window.location.assign('login.form');
+
+}
+</script>
+</html>

@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            form{
+                align-items: center;
+                width: 300px;
+                border:black 1px solid;
+                display: flex;
+                justify-content: center;
+                height:350px;
+                margin-left: 500px;
+                margin-top: 100px;
+            }
+           #btn_login{
+               width:175px;
+           }
+           #btn_reg_admin{
+               width: 175px;;
+           }
+           h4,h1{
+               text-align: center;
+           }
+        </style>
+    </head>
+    <body>
+        <form id="login_form">
+            <div class="main">
+            <h1>LOGIN</h1>
+            <input type="email" name="log1" id="log_email" placeholder="Email"required="required"><br><br>
+            <input type="password" name="log1" id="log_pass" placeholder="Password"required="required"><br><br>
+            <input type="submit" value="Login" id="btn_login" onclick="login()">
+            <h4>OR</h4>
+            <input type="submit" value="Register Now" id="btn_reg_admin" onclick="register()">
+        </div>
+        </form>
+    </body>
+    <script>
+        
+      
+        var cnt=0;
+    
+        var localAdmin=new Array();
+        localAdmin=JSON.parse(localStorage.getItem("admin"));
+
+        function login()
+    
+        {    var logFormDetails=document.getElementsByName('log1');
+           
+             
+             if(logFormDetails[0].value!=localAdmin.email){
+                alert("Email  is not valid");
+                }
+                if (logFormDetails[1].value!=localAdmin.password){
+                    alert("password is not valid"); 
+                }
+            if(logFormDetails[0].value==localAdmin.email && logFormDetails[1].value==localAdmin.password){
+                window.location.href="dashboard.html";
+            
+            }
+              
+           
+           
+        }
+        function register(){
+         alert(localAdmin.id);
+         if(cnt==1){
+         document.getElementById('btn_reg_admin').disabled=true;
+         }
+    
+     else {
+        documet.getElementById('btn_reg_admin').addEventListener('click', function(){
+         cnt++});
+        window.location.href="login.html";
+       
+     }
+        }   
+    
+    </script>
+</html>

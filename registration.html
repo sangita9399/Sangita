@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+         form{
+                align-items: center;
+                width: 300px;
+                border:black 1px solid;
+                display: flex;
+                justify-content: center;
+                height:450px;
+                margin-left: 500px;
+                margin-top: 100px;
+            }
+            #btn_reg{
+                border-radius: 10%;
+                width:175px;
+                padding: 8px;
+                font-size: 15px;
+            }
+            </style>
+    </head>
+    <body>
+        <form id="registre">
+            
+            <div class="main">
+                <h1>Registration</h1>
+                <input type="text" value="Name" name="reg_input" required="required"><br><br>
+                <input type="email" value="Email" name="reg_input" required="required"><br><br>
+                <input type="password" value="password" name="reg_input"required="required" ><br><br>
+                <input type="password" value="Confirm password" name="reg_input" ><br><br>
+                <select id="reg_city" name="reg_input"required="required">
+                    <option selected="selected">Choose a City</option>
+                    <option>surendranagar</option>
+                    <option>surat</option>
+                    <option>rajkot</option>
+                    <option>ahmedabad</option>
+                </select><br><br>
+                <select name="reg_input"required="required">
+                    <option selected="selected">Choose a State</option>
+                    <option>U.P.</option>
+                    <option>Gujarat</option>
+                    <option>M.p.</option>
+                    <option>Bihar</option>
+                    <option>keral</option>
+                </select><br><br>
+                <input type="checkbox" id="reg_check" required="required">Terms & Conditions<br><br>
+                <input type="submit" value="Register" id="btn_reg" onclick="regFormvalidate()">
+            </div>
+        </form>
+    </body>
+    <script>
+        var arr=new Array();
+        var adminRegDetail=document.getElementsByName('reg_input');
+        var admin = {
+       id:1,
+       name:"",
+        email: "",
+        password: "",
+    };
+        function regFormvalidate(){
+            if(adminRegDetail[2].value!= adminRegDetail[3].value){
+                alert("password and confirm password is not matching");
+            }
+            else{
+                admin.name=adminRegDetail[0].value;
+                admin.email=adminRegDetail[1].value;
+                admin.password=adminRegDetail[2].value;
+                 localStorage.setItem('admin', JSON.stringify(admin));
+                 arr = JSON.parse(localStorage.getItem("admin"));
+               newload();
+            }
+          
+        }
+        function newload()
+    {
+        window.location.repalce("login.html");
+    }
+    
+    </script>
+</html>
